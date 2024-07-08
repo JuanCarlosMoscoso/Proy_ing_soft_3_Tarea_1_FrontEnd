@@ -8,7 +8,10 @@ import { AccessDeniedComponent } from './pages/access-denied/access-denied.compo
 import { AdminRoleGuard } from './guards/admin-role.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GuestGuard } from './guards/guest.guard';
-import { IRole } from './interfaces';
+import { IRoleType } from './interfaces';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
+import { ProductsComponent } from './pages/products/products.component';
 
 export const routes: Routes = [
   {
@@ -46,9 +49,9 @@ export const routes: Routes = [
         canActivate:[AdminRoleGuard],
         data: { 
           authorities: [
-            IRole.admin, 
-            IRole.superAdmin
+            IRoleType.superAdminRole
           ],
+          showInSidebar: true,
           name: 'Users'
         }
       },
@@ -57,11 +60,47 @@ export const routes: Routes = [
         component: DashboardComponent,
         data: { 
           authorities: [
-            IRole.admin, 
-            IRole.superAdmin,
-            IRole.user
+            IRoleType.superAdminRole,
+            IRoleType.user
           ],
+          showInSidebar: true,
           name: 'Dashboard'
+        }
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        data: { 
+          authorities: [
+            IRoleType.superAdminRole,
+            IRoleType.user
+          ],
+          showInSidebar: false,
+          name: 'profile'
+        }
+      },
+      {
+        path: 'categories',
+        component: CategoriesComponent,
+        data: {
+          authorities: [
+            IRoleType.superAdminRole,
+            IRoleType.user
+          ],
+          showInSidebar: true,
+          name: 'Categories'
+        }
+      },
+      {
+        path: 'products',
+        component: ProductsComponent,
+        data: {
+          authorities: [
+            IRoleType.superAdminRole,
+            IRoleType.user
+          ],
+          showInSidebar: true,
+          name: 'Products'
         }
       }
     ],

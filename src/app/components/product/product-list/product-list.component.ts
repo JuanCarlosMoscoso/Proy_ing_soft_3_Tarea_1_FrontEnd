@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
-import { IProduct, IRoleType } from '../../../interfaces';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
+import { ICategory, IProduct, IRoleType } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../modal/modal.component';
 import { ProductFormComponent } from '../product-form/product-form.component';
@@ -19,8 +19,10 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent implements OnChanges {
+  
   @Input() itemList: IProduct[] = [];
   @Input() canAddProduct : boolean = false;
+  @Input() categories: ICategory[] = [];
 
   public selectedItem: IProduct = {};
   public productService: ProductService = inject(ProductService);
@@ -32,7 +34,7 @@ export class ProductListComponent implements OnChanges {
   }
 
   showDetailModal(item: IProduct, modal: any) {
-    this.selectedItem = {...item}
+    this.selectedItem = {...item};
     modal.show();
   }
 

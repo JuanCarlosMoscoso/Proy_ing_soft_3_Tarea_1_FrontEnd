@@ -12,7 +12,7 @@
           </button>
         </div>
       }
-    <app-category-list [itemList]="categoryService.items$()" />
+    <app-category-list [itemList]="categoryService.items$()"  [canAddCategory]="canAddCategory"/>
     } @loading (after 100ms; minimum 1s){
     <app-loader></app-loader>
     }

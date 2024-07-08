@@ -17,23 +17,36 @@
             'is-valid': description.valid && description.touched
           }" required />
         </div>
-        <div class="col-6">
+    </div>
+    <div class="row">
+        <div class="col-6 mb-2">
             <input #url="ngModel" type="number" class="form-control" id="price" name="price" placeholder="Price"
                 [(ngModel)]="product.price" [ngClass]="{
             'is-invalid': url.invalid && url.touched,
             'is-valid': url.valid && url.touched
           }" required />
         </div>
+
+        <!-- stock Quantity -->
+        <div class="col-6 mb-2">
+            <input #stock="ngModel" type="number" class="form-control" id="stock" name="stock" placeholder="Stock"
+                [(ngModel)]="product.stockQuantity" [ngClass]="{
+            'is-invalid': stock.invalid && stock.touched,
+            'is-valid': stock.valid && stock.touched
+          }" required />
+        </div>
+    </div>
+    <div class="row">
         <!-- List categories -->
         <div class="col-6">
-            <select #category="ngModel" class="form-select" id="category" name="category" [(ngModel)]="product.category"
-                [ngClass]="{
+            <select #category="ngModel" class="form-select" id="category" name="category" [value]="product.categoryId"
+                [(ngModel)]="product.categoryId" [ngClass]="{
             'is-invalid': category.invalid && category.touched,
             'is-valid': category.valid && category.touched
           }" required>
                 <option value="" disabled selected>Select a category</option>
                 @for (category of categories; track $index) {
-                    <option [value]="category.id">{{category.name}}</option>
+                <option [value]="category.id">{{category.name}}</option>
                 }
             </select>
         </div>

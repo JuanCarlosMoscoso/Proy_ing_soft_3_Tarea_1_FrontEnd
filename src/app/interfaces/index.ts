@@ -61,4 +61,5 @@ export interface IProduct {
   price?: number;
   stockQuantity?: number;
   category?: ICategory;
+  categoryId?: number;
 }

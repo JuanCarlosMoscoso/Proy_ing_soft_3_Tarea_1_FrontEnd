@@ -20,7 +20,7 @@ import { ActivatedRoute } from '@angular/router';
     ModalComponent,
     ProductFormComponent
   ],
-  templateUrl: './products.component.html',
+  templateUrl:'./products.component.html',
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent implements OnInit {

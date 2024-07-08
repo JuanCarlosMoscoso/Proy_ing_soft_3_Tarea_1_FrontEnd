@@ -13,7 +13,7 @@
                 </div>
             }
 
-            <app-product-list [itemList]="productService.items$()" [canAddProduct]="canAddProduct" />
+            <app-product-list [itemList]="productService.items$()" [canAddProduct]="canAddProduct" [categories]="categoryService.items$()" />
         }
         @loading (after 100ms; minimum 1s){
             <app-loader></app-loader>

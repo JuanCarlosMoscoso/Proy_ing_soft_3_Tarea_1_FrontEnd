@@ -45,6 +45,6 @@
 </div>
 
 <app-modal #detailModal>
-    <app-product-form [product]="selectedItem" [action]="'Update product'"
+    <app-product-form [product]="selectedItem" [action]="'Update product'" [categories]="categories"
         (callParentEvent)="handleFormAction($event)" />
 </app-modal>

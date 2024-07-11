@@ -68,7 +68,8 @@ export class ProductService extends BaseService<IProduct> {
     public delete(item: IProduct) {
         this.del(item.id).subscribe({
             next: () => {
-                this.itemListSignal.set(this.itemListSignal().filter(product => product.id != product.id));
+                const updatedItems = this.itemListSignal().filter(product => product.id !== item.id);
+                this.itemListSignal.set(updatedItems);
             },
             error: (error: any) => {
                 console.error('response', error.description);

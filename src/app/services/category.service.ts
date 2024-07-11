@@ -68,7 +68,8 @@ export class CategoryService extends BaseService<ICategory> {
     public delete(item: ICategory) {
         this.del(item.id).subscribe({
             next: () => {
-                this.itemListSignal.set(this.itemListSignal().filter(category => category.id != category.id));
+                const updatedItems = this.itemListSignal().filter(category => category.id !== item.id);
+                this.itemListSignal.set(updatedItems);
             },
             error: (error: any) => {
                 console.error('response', error.description);

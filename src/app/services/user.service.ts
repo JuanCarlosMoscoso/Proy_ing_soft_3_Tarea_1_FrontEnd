@@ -7,7 +7,7 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService extends BaseService<IUser> {
-  protected override source: string = 'users';
+  protected override source: string = 'admin';
   private userListSignal = signal<IUser[]>([]);
   get users$() {
     return this.userListSignal;
@@ -23,10 +23,10 @@ export class UserService extends BaseService<IUser> {
       }
     });
   }
-  saveUserSignal (user: IUser): Observable<any>{
+  saveUserSignal(user: IUser): Observable<any> {
     return this.add(user).pipe(
       tap((response: any) => {
-        this.userListSignal.update( users => [response, ...users]);
+        this.userListSignal.update(users => [response, ...users]);
       }),
       catchError(error => {
         console.error('Error saving user', error);
@@ -34,8 +34,14 @@ export class UserService extends BaseService<IUser> {
       })
     );
   }
-  updateUserSignal (user: IUser): Observable<any>{
-    return this.edit(user.id, user).pipe(
+  updateUserSignal(user: IUser): Observable<any> {
+    const userToUpdate = {
+      name: user.name,
+      lastname: user.lastname,
+      email: user.email,
+    }
+
+    return this.edit(user.id, userToUpdate).pipe(
       tap((response: any) => {
         const updatedUsers = this.userListSignal().map(u => u.id === user.id ? response : u);
         this.userListSignal.set(updatedUsers);
@@ -46,7 +52,7 @@ export class UserService extends BaseService<IUser> {
       })
     );
   }
-  deleteUserSignal (user: IUser): Observable<any>{
+  deleteUserSignal(user: IUser): Observable<any> {
     return this.del(user.id).pipe(
       tap((response: any) => {
         const updatedUsers = this.userListSignal().filter(u => u.id !== user.id);
